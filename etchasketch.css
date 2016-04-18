@@ -20,7 +20,7 @@ body {
 	border: 7px outset #e46e6e;
 	border-radius: 75px;
 	font-size: 1.5em;
-	margin: 0 auto;
+	margin: 20px auto;
 	position: relative;
 	width: 1100px;
 }
@@ -86,6 +86,19 @@ button:active {
 
 /*Knob animations on hover*/
 @-webkit-keyframes knobTurn {
+	0%, 100% {
+		transform: rotate(0deg);
+	}
+
+	20%, 60% {
+		transform:rotate(5deg);
+	}
+
+	40%, 80% {
+		transform:rotate(-10deg);
+	}
+}
+@keyframes knobTurn {
 	0%, 100% {
 		transform: rotate(0deg);
 	}
