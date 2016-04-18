@@ -26,45 +26,39 @@ function trail() {
 	});
 }
 
-//draw color
+//draw
 function draw(fillColor) {
-	fillColor = fillColor || "black";
-	$("td").on("mouseenter", function(){
-		var a = $(this);
-		a.css("background-color", fillColor);
-		a.addClass("colored");
+	$("#drawArea").on("mouseenter", "td", function(){
+		var $this = $(this);
+		$this.css("background-color", fillColor);
+		$this.addClass("colored");
 	});
 
-	if (!$("#drawArea").hasClass("trail")) {
-		return;
+	while (!$("#drawArea").hasClass("trail")) {
+		break;
 	}
-
-	else {
-		trail();
-	}
+	trail();
 }
 
 function drawChange() {
-	$("button, input").on("click", function() {
-		var $this = $(this);
-		var buttonValue = $this.data("name");
+	$("button").on("click", function() {
+		var buttonValue = $(this).data("name");
 
 		switch (buttonValue) {
 			// draw in black
 			case "drawBlack":
-				fillColor = "black";
-				draw(fillColor);
+				draw("black");
 			break;
 
 			// draw in a random color
 			case "drawRandom":
-				fillColor = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
-				draw(fillColor);
+				var randomColor = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+				draw(randomColor);
 			break;
 
 			// draw in rainbow
 			case "drawRainbow":
-				$("td").on("mouseenter", function(){
+				$("#drawArea").on("mouseenter", "td", function(){
 					fillColor = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
 					var a = $(this);
 					a.css("background-color", fillColor);
@@ -124,7 +118,7 @@ function drawChange() {
 //calls everything into action when the document is loaded
 $(document).ready(function(){
 	generateTable();
-	draw();
+	draw("black");
 	drawChange();
 });
 
